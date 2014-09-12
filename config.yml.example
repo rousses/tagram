@@ -22,3 +22,8 @@
     - roussetagram
   :channel: '##rousses'
 
+:files_repo:
+  :url:
+  :branch:
+  :passphrase:
+  
