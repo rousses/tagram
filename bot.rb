@@ -5,13 +5,8 @@ $:.unshift lib unless $:.include?(lib)
 require 'bundler'
 Bundler.require
 
-#require 'cinch'
 require 'yaml'
 
-require 'cinch/plugins/identify'
-require 'cinch/plugins/urlscraper'
-require 'rubygems' # in case of  ruby version < v1.9
-require 'git'
 %w(tweet tweet_stream jeveux eastereggs).each {|r|
   require r
 }
