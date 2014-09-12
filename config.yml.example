@@ -22,3 +22,6 @@
     - roussetagram
   :channel: '##rousses'
 
+:net:
+    :useragent: "Roussestagram IRC Bot (https://github.com/Rousses/tagram) ; ##Rousses at Freenode"
+    :wikiurl: "http://en.wikipedia.org/w/api.php?format=json&action=query&titles=" 
