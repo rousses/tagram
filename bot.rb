@@ -26,7 +26,7 @@ bot = Cinch::Bot.new do
     c.channels = Conf[:irc][:channels]
     c.plugins.plugins = [Cinch::Plugins::GingerTwitter, Cinch::Plugins::Identify,
                          Cinch::Plugins::Jeveux, Cinch::Plugins::EasterEggs,
-                         Cinch::Plugins::TweetStream, Cinch::Plugins::Wiki]
+                         Cinch::Plugins::TweetStream, Cinch::Plugins::Wikipedia]
     c.plugins.options[Cinch::Plugins::Identify] = Conf[:irc][:irc_auth]
   end
 end
