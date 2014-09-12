@@ -5,9 +5,20 @@ module Cinch::Plugins
   class GingerTwitter
     include Cinch::Plugin
 
-    def initialize(*args)
-      super
-      @client = Twitter::REST::Client.new do |config|
+    match(/tweet (.+)/, method: :tweet)
+
+    def tweet(m, query)
+      text, media = extract_text_and_media(query)
+      is_nsfw = !text.match(/nsfw/i).to_a.empty?
+      options = {possibly_sensitive: is_nsfw}
+      post_tweet(text, media)
+    rescue err
+      m.reply "FAIL! #{err.class.to_s}: #{err.message}"
+    end
+
+    private
+    def twitter
+      @twitter ||= Twitter::REST::Client.new do |config|
         config.consumer_key        = Conf[:twitter][:consumer_key]
         config.consumer_secret     = Conf[:twitter][:consumer_secret]
         config.access_token        = Conf[:twitter][:access_token]
@@ -15,22 +26,20 @@ module Cinch::Plugins
       end
     end
 
-    match(/tweet (.+)/, method: :tweet)
+    def post_tweet(text, media=nil, options = {})
+      media ? twitter.update_with_media!(text, media, options) : twitter.update!(text, options)
+    end
 
-    def tweet(m, query)
-      # client.update(query)
+    def extract_text_and_media(text)
       if query =~ /(png|jpg|jpeg|gif)/
         img = query.match(/(http[a-zA-Z0-9\:\/\.\-\_]*(jpg|png|jpeg|gif))/)[0]
-        txt = query.sub(/(http[a-zA-Z0-9\:\/\.\-\_]*(jpg|png|jpeg|gif))/,"")
+        text = query.sub(/(http[a-zA-Z0-9\:\/\.\-\_]*(jpg|png|jpeg|gif))/,"")
         uri = URI.parse(img)
-        p media = uri.open
+        media = uri.open
         media.instance_eval("def original_filename; '#{File.basename(uri.path)}'; end")
-        tweet = @client.update_with_media(txt, media)
-        m.reply "Tweet sent ! #{tweet.uri}"
+        [text, media]
       else
-        tweet = @client.update(query)
-        #echo tweet # mais c'est puts hein :>
-        m.reply "Tweet sent ! #{tweet.uri}"
+        [query, nil]
       end
     end
 
