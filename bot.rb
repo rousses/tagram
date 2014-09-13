@@ -8,7 +8,7 @@ Bundler.require
 
 require 'yaml'
 
-%w(tweet tweet_stream jeveux eastereggs).each {|r|
+%w(wikipedia tweet tweet_stream jeveux eastereggs).each {|r|
   require r
 }
 

@@ -9,12 +9,17 @@ GEM
     addressable (2.3.6)
     buftok (0.2.0)
     cinch (2.1.0)
+    cinch-cooldown (1.1.5)
+      cinch (~> 2)
+      time-lord (~> 1.0, >= 1.0.1)
     cinch-identify (1.6.0)
       cinch (~> 2.0)
+    cinch-toolbox (1.1.4)
+      nokogiri (~> 1.6.0)
     cinch-url-scraper (1.2.1)
       cinch (~> 2)
       mechanize (~> 2)
-    domain_name (0.5.19)
+    domain_name (0.5.21)
       unf (>= 0.0.5, < 1.0.0)
     equalizer (0.0.9)
     faraday (0.9.0)
@@ -48,6 +53,7 @@ GEM
     ntlm-http (0.1.1)
     simple_oauth (0.2.0)
     thread_safe (0.3.4)
+    time-lord (1.0.1)
     twitter (5.11.0)
       addressable (~> 2.3)
       buftok (~> 0.2.0)
@@ -68,9 +74,16 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  buftok
   cinch
+  cinch-cooldown
   cinch-identify
+  cinch-toolbox
   cinch-url-scraper
-  git
   cinch-wikipedia (= 1.0.4)!
+  domain_name (~> 0.5.21)
+  git
+  http-cookie (~> 1.0.2)
   twitter
+  unf
+  unf_ext

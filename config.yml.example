@@ -1,6 +1,6 @@
 :irc:
   :server: irc.freenode.org
-  :nick: Roussetagram
+  :nick: Roussetabot
   :user: ChanBot
   :realname: 'Ruby ChanBot for ##rousses'
   :channels: ['##rousses']
