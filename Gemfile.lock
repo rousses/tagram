@@ -1,3 +1,8 @@
+PATH
+  remote: lib/
+  specs:
+    cinch-wikipedia (1.0.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -65,4 +70,5 @@ DEPENDENCIES
   cinch
   cinch-identify
   cinch-url-scraper
+  cinch-wikipedia (= 1.0.4)!
   twitter
