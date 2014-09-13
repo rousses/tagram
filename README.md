@@ -7,4 +7,4 @@ twitter. On en est encore un peu loin, mais ça viendra.
 - [x] Prise en charge de twitter
 - Quelques plugins sympas :
     - [x] Je Veux ! La wishlist du channel
-    - [ ] Rechercher des articles sur Wikipédia
+    - [x] Rechercher des articles sur Wikipédia
