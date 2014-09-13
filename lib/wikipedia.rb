@@ -78,7 +78,7 @@ module Cinch
         alt_term = Cinch::Toolbox.get_html_element(url, '.searchdidyoumean')
         if alt_term
           alt_term = alt_term[/\AEssayez avec cette orthographe : (\w+)\z/, 1]
-          msg << "Tu voulais pas dire '#{alt_term}'?"
+          msg << "Tu voulais pas plutôt dire '#{alt_term}'?"
         else
           msg << 'Désolée :/'
         end
