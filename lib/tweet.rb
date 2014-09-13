@@ -12,7 +12,7 @@ module Cinch::Plugins
       is_nsfw = !text.match(/nsfw/i).to_a.empty?
       options = {possibly_sensitive: is_nsfw}
       post_tweet(text, media)
-    rescue err
+    rescue => err
       m.reply "FAIL! #{err.class.to_s}: #{err.message}"
     end
 
