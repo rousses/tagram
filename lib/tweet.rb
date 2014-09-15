@@ -3,6 +3,7 @@ require 'yaml'
 
 module Cinch::Plugins
   class GingerTwitter
+<<<<<<< HEAD
     include Cinch::Plugin
 
     match(/tweet (.+)/, method: :tweet)
@@ -42,6 +43,5 @@ module Cinch::Plugins
         [query, nil]
       end
     end
-
   end
 end
