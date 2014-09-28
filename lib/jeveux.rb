@@ -8,6 +8,15 @@ module Cinch::Plugins
 			super
         end
         
+		match(/jeveux$/, method: :randomjeveux)
+		
+		def randomjeveux(m)
+			jeveux = YAML.load_file('jeveux.yaml') 
+			r = Random.new.rand(0..(jeveux['jeveux'].length.to_i-1)) 
+			jv = 'Jeveux '+jeveux['jeveux'][r.to_i]+' - #'+r.to_s+'/'+jeveux['jeveux'].length.to_s
+			m.reply(jv)
+		end
+		
 		match(/jeveux (([a-zA-Z0-9]+)(.*))/, method: :jeveux)
 		def jeveux(m,query,param,opt)
 		
@@ -36,8 +45,8 @@ module Cinch::Plugins
     					if(nbr.to_i > jeveux['jeveux'].length)
 						m.reply('ce !jeveux n\'existe pas')
 					else
-						jeveuxSingle = jeveux['jeveux'][nbr.to_i]
-						m.reply(' jeveux #' + nbr.to_s +  '/' + jeveux['jeveux'].length.to_s + ' : je veux ' + jeveuxSingle.to_s)
+						jeveuxSingle = jeveux['jeveux'][nbr.to_i-1]
+						m.reply(' jeveux #' + nbr.to_i.to_s +  '/' + jeveux['jeveux'].length.to_s + ' : je veux ' + jeveuxSingle.to_s)
 					end
 				else
 					jeveux['jeveux'].push(query)
