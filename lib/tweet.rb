@@ -37,7 +37,7 @@ module Cinch::Plugins
         uri = URI.parse(img)
         media = uri.open
         media.instance_eval("def original_filename; '#{File.basename(uri.path)}'; end")
-        [query, media]
+        [text, media]
       else
         [query, nil]
       end
