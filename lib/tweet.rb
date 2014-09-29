@@ -1,3 +1,4 @@
+require 'uri'
 require 'open-uri'
 require 'yaml'
 
@@ -6,12 +7,22 @@ module Cinch::Plugins
     include Cinch::Plugin
 
     match(/tweet (.+)/, method: :tweet)
+    match(/untweet (.+)/, method: :remove_tweet)
 
     def tweet(m, query)
       text, media = extract_text_and_media(query)
       is_nsfw = !text.match(/nsfw/i).to_a.empty?
       options = {possibly_sensitive: is_nsfw}
       post_tweet(text, media)
+    rescue => err
+      m.reply "FAIL! #{err.class.to_s}: #{err.message}"
+    end
+
+    # !untweet 514807817480712193
+    # !untweet https://twitter.com/roussestagram/status/514807817480712193
+    def remove_tweet(m, id_or_url)
+      id = extract_tweet_id_from_url(id_or_url)
+      twitter.destroy_status(id)
     rescue => err
       m.reply "FAIL! #{err.class.to_s}: #{err.message}"
     end
@@ -42,5 +53,16 @@ module Cinch::Plugins
         [query, nil]
       end
     end
+
+    def extract_tweet_id_from_url(url)
+      if url =~ /\A\d+\z/ # in case we only got an id
+        url
+      else
+        uri = URI.parse(url)
+        _, nick, status, id = uri.path.split('/')
+        status == "status" ? id : nil
+      end
+    end
+
   end
 end
