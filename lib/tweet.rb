@@ -7,6 +7,8 @@ module Cinch::Plugins
     include Cinch::Plugin
 
     match(/tweet (.+)/, method: :tweet)
+    match(/fav (.+)/, method: :favorite)
+    match(/rt (.+)/, method: :retweet)
     match(/untweet (.+)/, method: :remove_tweet)
 
     def tweet(m, query)
@@ -14,6 +16,24 @@ module Cinch::Plugins
       is_nsfw = !text.match(/nsfw/i).to_a.empty?
       options = {possibly_sensitive: is_nsfw}
       post_tweet(text, media)
+    rescue => err
+      m.reply "FAIL! #{err.class.to_s}: #{err.message}"
+    end
+
+    # !rt 516525315368423424
+    # !rt https://twitter.com/DashieV3/status/516525315368423424
+    def retweet(m, id_or_url)
+      id = extract_tweet_id_from_url(id_or_url)
+      twitter.retweet!(id)
+    rescue => err
+      m.reply "FAIL! #{err.class.to_s}: #{err.message}"
+    end
+
+    # !fav 516525315368423424
+    # !fav https://twitter.com/DashieV3/status/516525315368423424
+    def favorite(m, id_or_url)
+      id = extract_tweet_id_from_url(id_or_url)
+      twitter.favorite!(id)
     rescue => err
       m.reply "FAIL! #{err.class.to_s}: #{err.message}"
     end
