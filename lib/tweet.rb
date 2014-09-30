@@ -78,16 +78,15 @@ module Cinch::Plugins
     end
 
     def extract_text_and_media(query)
-      if query =~ /(png|jpg|jpeg|gif)/
-        img = query.match(/(http[a-zA-Z0-9\:\/\.\-\_]*(jpg|png|jpeg|gif))/)[0]
-        text = query.sub(/(http[a-zA-Z0-9\:\/\.\-\_]*(jpg|png|jpeg|gif))/,"")
-        uri = URI.parse(img)
-        media = uri.open
-        media.instance_eval("def original_filename; '#{File.basename(uri.path)}'; end")
-        [text, media]
-      else
-        [query, nil]
-      end
+      medias = query.scan(/(http[a-zA-Z0-9\:\/\.\-\_]*(jpg|png|jpeg|gif))/)
+      return [query, nil] if medias.empty?
+      raise(IRCError, "Tweets can only contain one media!") if medias.size > 1
+      media = medias.first.first
+      text = query.gsub(media, "")
+      media_uri = URI.parse(media)
+      media_file = media_uri.open
+      media_file.instance_eval("def original_filename; '#{File.basename(media_uri.path)}'; end")
+      [text, media_file]
     end
 
     def extract_tweet_id_from_url(url)
