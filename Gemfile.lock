@@ -9,6 +9,8 @@ GEM
     addressable (2.3.6)
     buftok (0.2.0)
     cinch (2.1.0)
+    cinch-basic_ctcp (1.0.2)
+      cinch (~> 2.0)
     cinch-cooldown (1.1.5)
       cinch (~> 2)
       time-lord (~> 1.0, >= 1.0.1)
@@ -76,6 +78,7 @@ PLATFORMS
 DEPENDENCIES
   buftok
   cinch
+  cinch-basic_ctcp
   cinch-cooldown
   cinch-identify
   cinch-toolbox
