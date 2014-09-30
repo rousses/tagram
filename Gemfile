@@ -13,3 +13,4 @@ gem "unf_ext"
 gem "unf"
 gem "domain_name", "~> 0.5.21"
 gem "http-cookie", "~> 1.0.2"
+gem 'cinch-basic_ctcp'
