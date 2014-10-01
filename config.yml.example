@@ -4,6 +4,7 @@
   :user: ChanBot
   :realname: 'Ruby ChanBot for ##rousses'
   :channels: ['##rousses']
+  :version: ""Roussetagram IRC Bot (https://github.com/rousses/tagram)"
 
 :irc_auth:
   :username: Roussetagram
