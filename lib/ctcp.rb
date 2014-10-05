@@ -1,7 +1,7 @@
 require "time"
 
-module Cinch
-  module Plugins
+
+module Cinch::Plugins
     class BasicCTCP
       include Cinch::Plugin
 
