@@ -27,7 +27,7 @@ module Cinch::Plugins
     end
 
     def post_tweet(text, media=nil, options = {})
-      media ? twitter.update_with_media!(text, media, options) : twitter.update!(text, options)
+      media ? twitter.update_with_media(text, media, options) : twitter.update!(text, options)
     end
 
     def extract_text_and_media(query)
