@@ -40,7 +40,7 @@ module Cinch::Plugins
 				m.reply 'commande indisponible'
 			else
 				
-				if query =~ /^[0-9]{1,3}/
+				if query =~ /^[0-9]{1,3}$/
 					nbr = query.match(/^[0-9]{1,3}/)[0]
     					if(nbr.to_i > jeveux['jeveux'].length)
 						m.reply('ce !jeveux n\'existe pas')
