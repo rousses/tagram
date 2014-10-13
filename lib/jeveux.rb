@@ -22,7 +22,7 @@ module Cinch::Plugins
     def jeveux(m,query,param,opt)
     
 
-    if File.file?(filename) === false
+    if File.file?(@filename) === false
       File.open(@filename, "w+") { |file| file.write("") }
     end
     jeveux = YAML.load_file(@filename) 
